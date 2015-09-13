@@ -131,7 +131,13 @@ function getContent(node) {
       text += node.childNodes[i]._replacement;
     }
     else if (node.childNodes[i].nodeType === 3) {
-      text += node.childNodes[i].data;
+      var t = node.childNodes[i].data;
+      
+      if (node.nodeName !== 'CODE') {
+        t = t.replace(/<(\/?\w+([^>]*)?)>/gi, '&lt;$1&gt;');
+      }
+      
+      text += t;
     }
     else { continue; }
   }
